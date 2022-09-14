@@ -16,9 +16,9 @@ Clone the repository
     
 Switch to the repo folder
 
-    cd systems-analyst-exam-master
+    cd systems-analyst-exam
 
-Install the PHP dependencies using composer
+Install the PHP dependencies
 
     composer install
     
@@ -34,15 +34,19 @@ Generate a new application key
 
     php artisan key:generate
     
+Open your IDE, in this case Visual Studio Code
+
+    code .
+    
 Run the database migrations and seeders (**Set the database connection in .env before migrating**)
 
     php artisan migrate --seed
     
-Run Vite command to build asset files (**Open a new terminal**)
+Run vite command to build asset files (**Do not close the termninal used to run this command, it is recommended to use terminals in vscode**)
 
     npm run dev
 
-Start the local development server (**Open a new terminal**)
+Start the local development server (**Run in new terminal**)
 
     php artisan serve
 
@@ -52,11 +56,12 @@ You can now access the server at http://localhost:8000
 **TL;DR command list**
 
     git clone https://github.com/rhoelcartojano/systems-analyst-exam.git
-    cd systems-analyst-exam-master
+    cd systems-analyst-exam
     composer install
     npm install
     cp .env.example .env
     php artisan key:generate
+    code .
     npm run dev
     
 **Make sure you set the correct database connection information before running the migrations** [Environment variables](#environment-variables)
@@ -74,7 +79,6 @@ You can now access the server at http://localhost:8000
     Username / Email: test@example.com
     password: 12345678
     
-  
     
 ## Folders
 
