@@ -13,7 +13,7 @@
                     {{ session('status') }}
                 </div>
             @endif
-            Welcome, Admin {{ Auth::user()->name }}!
+            Welcome, Admin {{ Auth::user('admin')->name }}
         </div>
       </div>
       <br>

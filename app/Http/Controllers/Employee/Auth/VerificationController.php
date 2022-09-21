@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employee\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Support\Facades\Auth;
 
 class VerificationController extends Controller
 {
@@ -35,8 +36,12 @@ class VerificationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('employeeauth');
+        $this->middleware('employee_auth');
         $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');
+    }
+
+    protected function guard(){
+        return Auth::guard('employee');
     }
 }

@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class EmployeeAuthenticated
+class RedirectIfEmployeeAuthenticated
 {
     /**
      * Handle an incoming request.
@@ -18,11 +18,8 @@ class EmployeeAuthenticated
      */
     public function handle(Request $request, Closure $next)
     {
-
-        if(Auth::guard('employee')->check() === false){
-            return redirect(RouteServiceProvider::INDEX);
-        } else {
-            return response()->view('employee.employee_home');
+        if (Auth::guard('employee')->check()) {
+            return redirect(RouteServiceProvider::HOME);
         }
 
         return $next($request);

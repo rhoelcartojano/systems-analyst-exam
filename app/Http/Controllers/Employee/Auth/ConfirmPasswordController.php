@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employee\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
+use Illuminate\Support\Facades\Auth;
 
 class ConfirmPasswordController extends Controller
 {
@@ -35,6 +36,10 @@ class ConfirmPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('employeeauth');
+        $this->middleware('employee_auth');
+    }
+
+    protected function guard(){
+        return Auth::guard('employee');
     }
 }

@@ -22,7 +22,7 @@ Route::view('/',  'welcome');
   Route::post('admin/logout', [App\Http\Controllers\Admin\Auth\LoginController::class, 'logout'])->name('logout');
 
   // Registration Routes
-  Route::get('admin/register', [App\Http\Controllers\Admin\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+  Route::get('admin/register', [App\Http\Controllers\Admin\Auth\RegisterController::class, 'showRegistrationForm'])->name('admin.register');
   Route::post('admin/register', [App\Http\Controllers\Admin\Auth\RegisterController::class, 'register']);
 
   // Password Reset Routes
@@ -31,6 +31,15 @@ Route::view('/',  'welcome');
   Route::get('password/reset/{token}', [App\Http\Controllers\Admin\Auth\ResetPasswordController::class, 'showResetForm']);
   Route::post('password/reset', [App\Http\Controllers\Admin\Auth\ResetPasswordController::class, 'reset']);
 
+  // Employee Authentication Routes
+  Route::get('employee/login', [App\Http\Controllers\Employee\Auth\LoginController::class, 'showLogin'])->name('employee.login');
+  Route::post('employee/log', [App\Http\Controllers\Employee\Auth\LoginController::class, 'login'])->name('employee.log');
+  Route::post('employee/logout', [App\Http\Controllers\Employee\Auth\LoginController::class, 'logout'])->name('employee.logout');
+
+  Route::group(['middleware' => 'employee_auth'], function () {
+    Route::get('/employee/home', [App\Http\Controllers\Employee\HomeController::class, 'index'])->name('employee.employee_home');
+  });
+
   Route::group(['middleware' => 'auth'], function () {
     // Admin Routes
     Route::get('/admin/home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.admin_home');
@@ -38,15 +47,4 @@ Route::view('/',  'welcome');
 
     Route::resource('employee', App\Http\Controllers\Admin\EmployeeController::class); // CRUD
     Route::get('/export-employee-reports', [App\Http\Controllers\Admin\EmployeeController::class, 'exportCsv']);
-  });
-
-
-
-  // Employee Authentication Routes
-  Route::get('employee/login', [App\Http\Controllers\Employee\Auth\LoginController::class, 'showLoginForm'])->name('employee.login');
-  Route::post('employee/login', [App\Http\Controllers\Employee\Auth\LoginController::class, 'login'])->name('employee.log');
-  Route::post('employee/logout', [App\Http\Controllers\Employee\Auth\LoginController::class, 'logout'])->name('employee.logout');
-
-  Route::group(['middleware' => 'employeeauth'], function () {
-    Route::get('home', [App\Http\Controllers\Employee\HomeController::class, 'index'])->name('employee.home');
   });

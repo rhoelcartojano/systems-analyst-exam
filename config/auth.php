@@ -40,10 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
         'employee' => [
             'driver' => 'session',
             'provider' => 'employees',
-        ],
+        ]
     ],
 
     /*
@@ -96,6 +100,12 @@ return [
     'passwords' => [
         'admins' => [
             'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'employees' => [
+            'provider' => 'employees',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
