@@ -42,21 +42,13 @@ class RegisterController extends Controller
     }
 
     /**
-
      * Show the application registration form.
-
      *
-
      * @return \Illuminate\View\View
-
      */
-
     public function showRegistrationForm()
-
     {
-
         return view('admin.auth.register');
-
     }
 
     /**
